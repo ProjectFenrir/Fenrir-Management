@@ -8,11 +8,11 @@
         $username = $_POST['username'];
         $password = $_POST['hexField'];
      
-        if (login($username, $password, $mysqli) == true) {
-            header('Location: ../controlpanel.php');
+        if (login($username, $password, $conn) == true) {
+            header('Location: ../get-user.php');
         } else {
             header('Location: ../index.php?error=1');
         }
     } else {
-        echo 'Invalid Request';
+        echo 'Something went wrong. Invalid request.';
     }

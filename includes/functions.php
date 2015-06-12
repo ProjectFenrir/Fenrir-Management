@@ -22,12 +22,12 @@
 
 	    session_name($session_name);
 	    session_start();
-	    // if previous session found, delete it
+	    // If a session is found, delete/renew it
 	    session_regenerate_id(true);
 	}
 
-	function login($username, $password, $mysqli) {
-		if ($stmt = $mysqli->prepare('SELECT id, username, password, salt FROM users WHERE email = "test@example.com" LIMIT 1')) {
+	function login($username, $password, $conn) {
+		if ($stmt = $conn->prepare('SELECT id, username, password, salt FROM users WHERE username = ? LIMIT 1')) {
 			$stmt->bind_param('s', $username);
 			$stmt->execute();
 			$stmt->store_result();
@@ -35,7 +35,7 @@
 			$stmt->bind_result($user_id, $username, $db_password, $salt);
 			$stmt->fetch();
 
-			$password = hash('sha512', $password, $salt);
+			$password = hash('sha512', $password . $salt);
 			if ($stmt->num_rows == 1) {
 				if ($db_password == $password) {
 					$user_browser = $_SERVER['HTTP_USER_AGENT'];
@@ -46,7 +46,7 @@
 	                return true;
 				} else {
 					$currentTime = time();
-					$mysqli->query("INSERT INTO login_attempts(user_id, currentTime) VALUES ('$user_id', '$currentTime')");
+					$conn->query("INSERT INTO login_attempts(user_id, currentTime) VALUES ('$user_id', '$currentTime')");
 					return false;
 				}
 			} else {
@@ -56,7 +56,7 @@
 		}
 	}
 
-	function login_check($mysqli) {
+	function login_check($conn) {
 		if (isset($_SESSION['user_id'], $_SESSION['username'], $_SESSION['login_string'])) {
 			$user_id = $_SESSION['user_id'];
 			$username = $_SESSION['username'];
@@ -64,7 +64,7 @@
 
 			$user_browser = $_SERVER['HTTP_USER_AGENT'];
 
-			if ($stmt = $mysqli->prepare('SELECT password FROM users WHERE id = ? LIMIT 1')) {
+			if ($stmt = $conn->prepare('SELECT password FROM users WHERE id = ? LIMIT 1')) {
 				$stmt->bind_param('i', $user_id);
 				$stmt->execute();
 				$stmt->store_result();
