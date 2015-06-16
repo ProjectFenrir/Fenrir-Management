@@ -1,14 +1,10 @@
 <?php
     include_once 'includes/db_connect.php';
     include_once 'includes/functions.php';
-
     secure_session_start();
 
-    if (login_check($conn) == true) {
-        $logged = 'in';
-    } else {
-        $logged = 'out';
-    }
+	if (!login_check())
+		header("Location: get-user.php");
 ?>
 <!DOCTYPE HTML>
 <!--
@@ -42,7 +38,7 @@
 				<div id="banner-wrapper">
 					<section id="banner">
 						<h2>Login</h2>
-						<form action='includes/process_login.php' method='post' name='login_form'>
+						<form action='includes/process_login.php' method='post' name='login_form' id="login_form">
 							<input type='text' name='username' placeholder='Username'><br>
 			                <input type='password' name='password' placeholder='Password'><br>
 			                <button onclick='formhash(this.form, this.form.password);'><span class="fa fa-check-square fa-1x"></span></button>

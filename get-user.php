@@ -1,3 +1,11 @@
+<?php
+	include('includes/db_connect.php');
+	include('includes/functions.php');
+    secure_session_start();
+
+	if (login_check() == true)
+		header("Location: index.php");
+?>
 <!DOCTYPE HTML>
 <!--
 	TXT by HTML5 UP
@@ -60,9 +68,9 @@
 
 											<section class="form-user-action">
 												<h3>Insert username</h3>
-												<form action="includes/get-user.php">
-													<input type="text" name="username"/>
-													<input type="submit" name="get_user" value="Get" />
+												<form action="includes/get_user.php" method="GET">
+													<input type="text" name="username" placeholder="Username "/>
+													<input type="submit" value="Get" />
 												</form>
 											</section>
 

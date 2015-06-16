@@ -40,57 +40,21 @@
 				if ($db_password == $password) {
 					$user_browser = $_SERVER['HTTP_USER_AGENT'];
 					$_SESSION['user_id'] = $user_id;
-
+					$_SESSION['loggedin'] = true;
 					$_SESSION['username'] = $username;
 	                $_SESSION['login_string'] = hash('sha512', $password . $user_browser);
 	                return true;
-				} else {
-					$currentTime = time();
-					$conn->query("INSERT INTO login_attempts(user_id, currentTime) VALUES ('$user_id', '$currentTime')");
-					return false;
 				}
 			} else {
-				// No user found
+				echo "User not found";
 				return false;
 			}
 		}
 	}
 
-	function login_check($conn) {
-		if (isset($_SESSION['user_id'], $_SESSION['username'], $_SESSION['login_string'])) {
-			$user_id = $_SESSION['user_id'];
-			$username = $_SESSION['username'];
-			$login_string = $_SESSION['login_string'];
-
-			$user_browser = $_SERVER['HTTP_USER_AGENT'];
-
-			if ($stmt = $conn->prepare('SELECT password FROM users WHERE id = ? LIMIT 1')) {
-				$stmt->bind_param('i', $user_id);
-				$stmt->execute();
-				$stmt->store_result();
-
-				if ($stmt->num_rows == 1) {
-					$stmt->bind_result($password);
-					$stmt->fetch();
-					$login_check = hash('sha512', $password, $user_browser);
-
-					if ($login_check == $login_string) {
-						// success
-						return true;
-					} else {
-						// no success
-						return false;
-					}
-				} else {
-					// no success
-					return false;
-				}
-			} else {
-				// no success
-				return false;
-			}
-		} else {
-			// no success
-			return false;
+	function login_check() {
+		$loggedin = (isset($_SESSION['loggedin']) ? $_SESSION['loggedin'] : null);
+		if (!$loggedin) {
+			return true;
 		}
 	}

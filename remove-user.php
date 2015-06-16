@@ -1,3 +1,11 @@
+<?php
+	include('includes/db_connect.php');
+	include('includes/functions.php');
+    secure_session_start();
+
+	if (login_check() == true)
+		header("Location: index.php");
+?>
 <!DOCTYPE HTML>
 <!--
 	TXT by HTML5 UP
@@ -60,9 +68,11 @@
 
 											<section>
 												<h3>Insert info</h3>
-												<input type="text" name="username" placeholder="Username"/>
+												<form action="includes/remove_user.php" method="post">
+													<input type="text" name="username" placeholder="Username"/>
 													<input type="text" name="company" placeholder="Company"/>
-													<input type="submit" name="submit" value="Remove" />
+													<input type="submit" value="Remove" />
+												</form>
 											</section>
 
 										</article>

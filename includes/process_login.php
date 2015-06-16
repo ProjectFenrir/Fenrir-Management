@@ -9,6 +9,7 @@
         $password = $_POST['hexField'];
      
         if (login($username, $password, $conn) == true) {
+            $_SESSION['loggedin'] = true;
             header('Location: ../get-user.php');
         } else {
             header('Location: ../index.php?error=1');

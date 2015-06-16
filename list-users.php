@@ -1,5 +1,10 @@
 <?php
-    require('includes/db_connect.php');
+	include('includes/db_connect.php');
+	include('includes/functions.php');
+    secure_session_start();
+
+	if (login_check() == true)
+		header("Location: index.php");
 ?>
 <!DOCTYPE HTML>
 <!--
