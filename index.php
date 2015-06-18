@@ -41,7 +41,7 @@
 						<form action='includes/process_login.php' method='post' name='login_form' id="login_form">
 							<input type='text' name='username' placeholder='Username'><br>
 			                <input type='password' name='password' placeholder='Password'><br>
-			                <button onclick='formhash(this.form, this.form.password);'><span class="fa fa-check-square fa-1x"></span></button>
+			                <button name="login_button" onclick='formhash(this.form, this.form.password);'><span class="fa fa-check-square fa-1x"></span></button>
 			            </form>
 		                <div class='login-error'>
 			                <?php

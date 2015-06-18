@@ -68,14 +68,14 @@
 
 											<section>
 												<h3>Insert info</h3>
-												<form action="includes/add_user.php" method="post">
+												<form name="form-add-user" action="includes/add_user.php" method="post">
 													<input type="text" name="username" placeholder="Username"/>
 													<input type="text" name="company" placeholder="Company"/>
 													<input type="email" name="email" placeholder="Email"/>
 													<input type="text" name="phone" placeholder="Phone nr."/>
 													<input type="password" name="password" placeholder="Password"/>
 													<input type="password" name="repassword" placeholder="Re-type password"/>
-													<input type="submit" value="Add" />
+													<input type="submit" name="submit" value="Add" />
 												</form>
 											</section>
 
