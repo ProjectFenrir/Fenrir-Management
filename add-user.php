@@ -3,8 +3,8 @@
 	include('includes/functions.php');
     secure_session_start();
 
-	if (login_check() == true)
-		header("Location: index.php");
+	// if (login_check() == true)
+	// 	header("Location: index.php");
 ?>
 <!DOCTYPE HTML>
 <!--

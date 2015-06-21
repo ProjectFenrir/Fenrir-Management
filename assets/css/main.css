@@ -1581,6 +1581,8 @@
 		width: 100%;
 	}
 	th { text-align:left; }
+	table tr:first-child { font-weight:bold;background-color:#b1ddab;border-bottom:1px solid black; }
+	tr:nth-child(odd) { background-color:#eee; }
 
 		table.default {
 			width: 100%;
