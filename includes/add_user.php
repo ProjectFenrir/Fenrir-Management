@@ -10,6 +10,7 @@
 	$company = (isset($_POST['company']) ? $_POST['company'] : null);
 	$password = (isset($_POST['password']) ? $_POST['password'] : null);
 	$repassword = (isset($_POST['repassword']) ? $_POST['repassword'] : null);
+	$email = (isset($_POST['email']) ? $_POST['email'] : null);
 
 	$query = "SELECT username, company FROM `users` WHERE username LIKE '" . $username . "' AND company LIKE '" . $company . "'";
 	$result = $conn->query($query);
@@ -19,6 +20,9 @@
 		echo "<br/><a href='/'>Click to return</a>";
 	} else if ($password != $repassword) {
 		echo "Passwords do not match.";
+		echo "<br/><a href='/'>Click to return</a>";
+	} else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+		echo "Invalid email.";
 		echo "<br/><a href='/'>Click to return</a>";
 	} else {
 		$email = (isset($_POST['email']) ? $_POST['email'] : null);
