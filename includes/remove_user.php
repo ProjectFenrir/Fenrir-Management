@@ -1,7 +1,7 @@
 <?php
 	include_once 'db_connect.php';
 
-	$conn = new mysqli(HOST,USER,PASSWORD, "fenrir_customers");
+	$conn = new mysqli(HOST,USER,PASSWORD, "fenrir_clients");
 	if (!$conn) {
 		echo "Connection error. Contact administrator.";
 	}

@@ -1,7 +1,8 @@
 <?php
 	include_once 'db_connect.php';
+	include_once 'functions.php';
 
-	$conn = new mysqli(HOST,USER,PASSWORD, "fenrir_customers");
+	$conn = new mysqli(HOST,USER,PASSWORD, "fenrir_clients");
 	if (!$conn) {
 		echo "Connection error. Contact administrator.";
 	}
@@ -33,6 +34,7 @@
 		for ($i = 0; $i < 4; $i++) {
 			$salt = substr(md5(rand()), 0, 32) . $salt;
 		}
+		$password = hash('sha512', $password . $salt);
 
 	    $query = "INSERT INTO `users` VALUES(id,'".$username."','".$company."','".$email."','".$phone."','".$password."','".$salt."')";
 	    $stmt = $conn->prepare($query);

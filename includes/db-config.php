@@ -1,7 +1,7 @@
 <?php
-	define('HOST', 'localhost');
-	define('USER', 'root');
-	define('PASSWORD', '');
+	define('HOST', '188.166.123.191');
+	define('USER', 'fenriruser');
+	define('PASSWORD', 'tempunreal');
 	define('DATABASE', 'fenrir_management');
 	 
 	define('CAN_REGISTER', 'any');
